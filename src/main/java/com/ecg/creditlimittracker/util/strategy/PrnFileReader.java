@@ -22,7 +22,6 @@ public class PrnFileReader implements FileReadingStrategy{
         BufferedReader br;
         List<CreditLimitModel> beans = new ArrayList<>();
         Map<String, CreditLimitModel> map = new HashMap<>();
-
         try {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName), StandardCharsets.ISO_8859_1));
             String line;
@@ -33,25 +32,17 @@ public class PrnFileReader implements FileReadingStrategy{
                     count += 1;
                     continue;
                 }
-                System.out.println(line);
-                System.out.println("line");
-//                Arrays.stream(line.split("\t")).forEach(x->list.add(x));
-
                 CreditLimitModel bean = new CreditLimitModel();
                 bean.setName(line.substring(0, 16).trim());
                 bean.setAddress(line.substring(16, 38).trim());
                 bean.setPostcode(line.substring(38, 47).trim());
                 bean.setPhoneNumber(line.substring(47, 62).trim());
-//                bean.setCreditLimit((Double.parseDouble(line.substring(62, 74).trim())) / 100);
                 bean.setCreditLimit(CreditLimitUtil.convertDollarToCent(line.substring(62, 74).trim()));
                 bean.setDob(Constants.PRN_DATE_FORMAT.parse(line.substring(74).trim()));
                 beans.add(bean);
                 map.put(bean.getPhoneNumber(), bean);
 
             }
-            System.out.println("SIZE: " + beans.size());
-            beans.forEach(System.out::println);
-
         } catch (IOException | ParseException e) {
             e.printStackTrace();
         }

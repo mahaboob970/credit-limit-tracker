@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class GenericFileReader {
 
-    private Map<String, CreditLimitModel> contentMap; // Check if its required
+    private Map<String, CreditLimitModel> contentMap;
 
     private FileReadingStrategy strategy;
 

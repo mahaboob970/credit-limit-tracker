@@ -5,6 +5,5 @@ import org.springframework.stereotype.Component;
 @Component
 public interface CreditLimitTrackerService {
 
-
-    public void showConflicts();
+    public String showConflicts();
 }
